@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type='text/css'>
+	.center {
+		text-align: center;
+	}
+	ul#images a {
+		vertical-align: middle;
+		min-height: 140px;
+	}
+</style>
+<link href="/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="/css/bootstrap-responsive.min.css" rel="stylesheet"/>
+<script src="/js/jquery-1.8.3.min.js"></script>
+<script src="/js/underscore-min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src='/js/sabujo-url.js'></script>
+<meta charset='utf-8' />
+<title>Sabujo</title>
+</head>
+<body>
+	<div class='navbar'>
+		<div class='navbar-inner'>
+			<a class='brand'>
+				<img src='/img/sabujo-logo3.png' alt='Sabujo'/>
+			</a>
+		</div>
+	</div>
+	<div class='container'>
+		<div class='row'>
+			<div class='span12'>
+				<h1>
+					<a id='title' href=''></a>
+				</h1>
+			</div>
+		</div>
+		<div class='row'>
+			<div class='span12'>
+				<div class='row'>
+					<div class='span8'>
+						<div class='row'>
+							<div class='span8'>
+								<div id='heads'>
+								</div>
+							</div>
+						</div>
+						<div class='row'>
+							<div class='span8'>
+								<div id='text'>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class='span4' style='border-radius:5px'>
+						<ul id='images' class='thumbnails'>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<input type='hidden' id='urlId' value='{{urlId}}' />
+</body>
+</html>
