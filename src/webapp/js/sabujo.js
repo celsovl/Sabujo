@@ -64,22 +64,29 @@ $(function() {
 
 				$('#popuppos').popover('destroy');
 
-				$('#popuppos').css({
-					position: 'absolute',
-					left: node.displayX - 5 + $('#sig').get(0).offsetLeft,
-					top: node.displayY + 5 + $('#sig').get(0).offsetTop
-				}).popover({
-					animation: true,
-					html: true,
-					placement: 'bottom',
-					title: website.domain,
-					content: html.join('\n')
-				});
+				if ($('#popuppos').data('last-domain') != website.domain) {
+					$('#popuppos').css({
+						position: 'absolute',
+						left: node.displayX - 5 + $('#sig').get(0).offsetLeft,
+						top: node.displayY + 5 + $('#sig').get(0).offsetTop
+					});
 
-				$('#popuppos').popover('show');
-				$('#domain').text(website.domain).attr('href', '/domain/' + website.domain);
-				self.loadTopHeaders(website);
-				self.loadImages(website);
+					$('#popuppos').popover({
+						animation: true,
+						html: true,
+						placement: 'bottom',
+						title: website.domain,
+						content: html.join('\n')
+					}).data('last-domain', website.domain);
+
+					$('#popuppos').popover('show');
+
+					$('#domain').text(website.domain).attr('href', '/domain/' + website.domain);
+					self.loadTopHeaders(website);
+					self.loadImages(website);
+				} else {
+					$('#popuppos').data('last-domain', null);
+				}
 			}
 
 
