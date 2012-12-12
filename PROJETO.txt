@@ -1,0 +1,3 @@
+Sabujo
+
+Com o objetivo de mostrar a Web como web, Sabujo procura, em cada página que analisa, relações entre diferentes domínios e subdomínios.
