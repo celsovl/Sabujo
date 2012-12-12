@@ -1,0 +1,65 @@
+Sabujo
+
+PRÉ-REQUISITOS
+
+Para executar o Sabujo é preciso primeiramente do Windows 7 (única plataforma testada) e instalar: Python 3.3 32-bits, MySQL Community Server 5.5.28 32-bits e ImageMagick-6.8.0-8-Q16-windows-dll. É preciso, ainda, instalar as seguintes bibliotecas para python: Bottle 0.11 [BOTTLE], Beautiful Soup 4 [SOUP], MySQL Connector/Python 1.0.7 para python 3.2 [MYSQLC] 
+
+* As bibliotecas python podem ser instaladas utilizando qualquer as ferramentas pip ou easy_install.
+
+* O caminho padrão de instalação do ImageMagick deve ser mantido por limitações do modulo de imagens.
+
+APLICATIVOS
+
+Sabujo é composto de três aplicativos:
+
+Downloader: responsável pelo download de páginas, imagens e outros e, também, por descobrir as próximas urls para download.
+
+Processd: Para cada url baixada, este aplicativo analisa o http request, response e o conteúdo baixado. Se for uma página, extrai as relações entre os domínios, título, links, descrição, texto, cabeçalhos e imagens. Caso seja uma imagem, gera uma versão reduzida para manter em cache.
+
+Webapp: web server do Sabujo.
+
+PROCEDIMENTOS
+
+1. Configurar o PYTHONPATH. Como o Sabujo foi dividido em módulos e para que não haja necessidade de instalar esses módulos no site-package da instalação do Python, a variável de ambiente PYTHONPATH deve conter a entrada [Caminho para a pasta Raiz do Sabujo]\src:
+
+    set PYTHONPATH=[Caminho Sabujo]\src
+	
+2. Iniciar o servidor do MySQL. Executar o aplicativo mysqld.exe que fica no diretório \Program Files\mysql v...\bin.
+
+3. Executar os seguintes comandos num prompt de comando (considerando que o mysql está no PATH):
+
+	mysql --user=[usuario] --password=[senha]
+	CREATE DATABASE sabujo;
+	[CTRL + C]
+	mysql --user=[usuario] --password=[senha] sabujo < [Caminho Sabujo]\src\database\ddl.sql
+	mysql --user=[usuario] --password=[senha]
+	INSERT INTO taskQueue VALUES (NULL, '[URL INICIAL]', 0x00, false);
+	[CTRL + C]
+
+4. Executar o comando 'python -m crawler.downloader' num prompt de comando (sem aspas), para iniciar o aplicativo Downloader.
+
+5. Executar o comando 'python -m crawler.processd' num prompt de comando (sem aspas), para iniciar o aplicativo Processd.
+
+6. Executar os seguintes comandos:
+
+	cd [Caminho Sabujo]\src\webapp
+	python -m webapp
+
+, para iniciar o web server.
+
+	O web server é o único dos aplicativos que exige que a pasta inicial seja webapp.
+
+6. Finalmente, abra um browser rápido e digite o endereço http://localhost:8000/.
+
+* Inicialmente, não haverá muito o que consultar. É necessário deixar que os aplicativos Downloader e Processd executem por longos períodos, para que o site tenha algo de útil para exibir. 
+
+REFERÊNCIAS
+
+[BOTTLE] Bottle: Python Web Framework
+http://bottlepy.org/docs/0.11/
+
+[MYSQLC] MySQL Connector/Python
+http://www.mysql.com/downloads/connector/python/
+
+[SOUP] Beautiful Soup: pulling data out of HTML and XML
+http://www.crummy.com/software/Beautiful Soup/bs4/doc/
